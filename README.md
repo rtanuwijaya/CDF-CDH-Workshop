@@ -415,7 +415,7 @@ Go back to [NiFi UI](http://demo.cloudera.com:9090/nifi/) and follow the steps b
   
 - **Step 5: Format time [ISO format](https://en.wikipedia.org/wiki/ISO_8601) with UpdateAttribute processor (future use for time based analytics)**
   - Add UpdateAttribute processor and link from EvaluateJsonPath on **matched** relationship
-  - Using handy [NiFi's language expression](https://nifi.apache.org/docs/nifi-docs/html/expression-language-guide.html#dates), add a new attribue ```dateandtime``` with value: ```${timestamp:format("yyyy-MM-dd'T'HH:mm:ss'Z'", "Asia/Singapore")}``` to properties tab
+  - Using handy [NiFi's language expression](https://nifi.apache.org/docs/nifi-docs/html/expression-language-guide.html#dates), add a new attribue ```dateandtime``` with value: ```${timestamp:format("yyyy-MM-dd'T'HH:mm:ss'Z'", "Asia/Jakarta")}``` to properties tab
 
 ![Link Processor](./images/cdf_updateattribute.jpg)
 
