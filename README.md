@@ -634,6 +634,62 @@ This concludes our lab. Hope you have built a better understanding of CDF and CD
 
 --
 
+## Process sentiment analysis on tweets
+
+### Apply for Twitter developer account and create an app
+
+Visit [Twitter developer page](https://developer.twitter.com/en/apply-for-access.html) and click on Apply for a developer account. If you don't have a Twitter account, sign up.
+
+After you have added a valid email address, follow the different account creation steps
+
+![twitter-account-details](images/twitter-account-details.png)
+
+![twitter-usecase-details](images/twitter-usecase-details.png)
+
+For the use case details, you can reuse the text below:
+
+```
+1. This account will be used for demo, building streaming data flow with real-time sentiment analyses using NiFi, Kafka and Druid
+2. I intend to compare tweets against a machine learning model using NLP techniques for sentiment analysis
+3. My use case does not involve tweeting, retweeting or liking content
+4. Individual tweets will not be displayed, data will be aggregated per sentiment: very negative, negative, neutral, positive and very positive
+```
+
+Agree to the Terms of Services
+
+![twitter-termsofservices-details](images/twitter-termsofservices-details.png)
+
+Finally click on the link from the email you have received and create an app
+
+![twitter-createanapp](images/twitter-createanapp.png)
+
+![twitter-appdetails](images/twitter-appdetails.png)
+
+Finally create the Keys and Tokens that will be needed by the NiFi processor to pull Tweets using the Twitter API
+
+![twitter-keysandtokens](images/twitter-keysandtokens.png)
+
+## Create a NiFi flow
+
+- Step 1: Get the tweets to be analysed
+  - Add GetTwitter processor to the canvas
+  - **Important!** From Scheduling tab change Run Schedule property to **2 sec**
+  - On the Properties tab
+    - Set Twitter Endpoint to **Filter Endpoint**
+    - Fill the Consumer Key, Consumer Secret, Access Token and Access Token Secret with the app keys and token
+    - Set Languages to **en**
+    - Provide a set of Terms to Filter On, i.e. 'cloudera'
+  - Apply changes
+  
+- Step 2: Call the web service started earlier on incoming message
+  - Add InvokeHTTP processor and link from ReplaceText on **success** relationship
+  - Double click on processor and check all relationships except **Response** on settings tab
+  - Go to properties tab and set value for **HTTP Method** to **POST**
+  - Set **Remote URL** with value: ```http://demo.cloudera.com:9999/?properties=%7B%22annotators%22%3A%22sentiment%22%2C%22outputFormat%22%3A%22json%22%7D``` which is the url encoded value for **http://demo.cloudera.com:9999/?properties={"annotators":"sentiment","outputFormat":"json"}**
+  - Set **Content-Type** to **application/x-www-form-urlencoded**
+  - Apply changes
+
+
 
 
 
