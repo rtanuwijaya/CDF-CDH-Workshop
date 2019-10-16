@@ -69,15 +69,13 @@ Replacing the ip (xx.xx.xx.xx) address with the one provided by Cloudera during 
 
 ### SSH to the sandbox
 
-You would need to download the pem file, to be able to ssh to your instance. The .pem file (Mac) is available [here](https://rajat-cloudera-bigdatalab.s3-ap-southeast-1.amazonaws.com/sg-cdf-cdp-cdsw-workshop.pem) and the ppk (Windows) is [here](https://rajat-cloudera-bigdatalab.s3-ap-southeast-1.amazonaws.com/sg-cdf-cdp-cdsw-workshop.ppk)
-
 If you are using mac, then open terminal and navigate to the directory where you have downloaded this file and execute the following:
 
-	$ chmod 400 sg-cdf-cdp-cdsw-workshop.pem
+	$ chmod 400 hdp-workshop.pem
 
 Then you can ssh by typing (Public IP to be provided by Cloudera):
 
-	$ ssh -i sg-cdf-cdp-cdsw-workshop.pem centos@public_ip_of_instance
+	$ ssh -i hdp-workshop.pem centos@public_ip_of_instance
 
 On Mac use the terminal to SSH
 
