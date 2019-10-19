@@ -212,9 +212,11 @@ Finally create the Keys and Tokens that will be needed by the NiFi processor to 
 
 ### Build NiFi flow
 
+<!--
 In order to have a streaming source available for our workshop, we are going to make use of the publicly available Meetup.com API and connect to their WebSocket.
 
 The API documentation is available [here](https://www.meetup.com/meetup_api/docs/stream/2/event_comments/#websockets).
+-->
 
 In this scenario we are going to stream all comments, for all topics, into NiFi and classify each one of them into the 5 categories listed above. 
 
@@ -509,20 +511,20 @@ We will now setup a Kudu table with the same schema that we are using in Step 6 
 
 - Execute the following query in the Impala query console
 
-CREATE TABLE users_kudu
- (
- timestamp_ms BIGINT,
- user STRING,
- user_location STRING default null,
- followers_count INT,
- friends_count INT,
- text STRING,
- sentiment STRING,
- PRIMARY KEY(timestamp_ms, user)
- )
- PARTITION BY HASH PARTITIONS 10
- STORED AS KUDU
-  TBLPROPERTIES ('kudu.num_tablet_replicas' = '1');
+        CREATE TABLE users_kudu
+        (
+         timestamp_ms BIGINT,
+         user STRING,
+         user_location STRING default null,
+         followers_count INT,
+         friends_count INT,
+         text STRING,
+         sentiment STRING,
+         PRIMARY KEY(timestamp_ms, user)
+         )
+         PARTITION BY HASH PARTITIONS 10
+         STORED AS KUDU
+         TBLPROPERTIES ('kudu.num_tablet_replicas' = '1');
 
 - Click the blue 'Play' button on the left. You will get a confirmation that the table has been created. 
 
