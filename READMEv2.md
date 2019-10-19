@@ -173,6 +173,43 @@ The model will classify the given text into 5 categories:
 
 --
 
+## Process sentiment analysis on tweets
+
+### Apply for Twitter developer account and create an app
+
+Visit [Twitter developer page](https://developer.twitter.com/en/apply-for-access.html) and click on Apply for a developer account. If you don't have a Twitter account, sign up.
+
+After you have added a valid email address, follow the different account creation steps
+
+![twitter-account-details](images/twitter-account-details.png)
+
+![twitter-usecase-details](images/twitter-usecase-details.png)
+
+For the use case details, you can reuse the text below:
+
+```
+1. This account will be used for demo, building streaming data flow with real-time sentiment analyses using NiFi, Kafka and Druid
+2. I intend to compare tweets against a machine learning model using NLP techniques for sentiment analysis
+3. My use case does not involve tweeting, retweeting or liking content
+4. Individual tweets will not be displayed, data will be aggregated per sentiment: very negative, negative, neutral, positive and very positive
+```
+
+Agree to the Terms of Services
+
+![twitter-termsofservices-details](images/twitter-termsofservices-details.png)
+
+Finally click on the link from the email you have received and create an app
+
+![twitter-createanapp](images/twitter-createanapp.png)
+
+![twitter-appdetails](images/twitter-appdetails.png)
+
+Finally create the Keys and Tokens that will be needed by the NiFi processor to pull Tweets using the Twitter API
+
+![twitter-keysandtokens](images/twitter-keysandtokens.png)
+
+--
+
 ### Build NiFi flow
 
 In order to have a streaming source available for our workshop, we are going to make use of the publicly available Meetup.com API and connect to their WebSocket.
@@ -472,19 +509,20 @@ We will now setup a Kudu table with the same schema that we are using in Step 6 
 
 - Execute the following query in the Impala query console
 
-		CREATE TABLE meetup_comment_sentiment
-		(
-		dateandtime string,
-		country string,
-		event string,
-		member string,
-		sentiment string,
-		msgcomment string,
-		 PRIMARY KEY (dateandtime)
-		)
-		PARTITION BY HASH PARTITIONS 10
-		STORED AS KUDU
-		TBLPROPERTIES ('kudu.num_tablet_replicas' = '1');
+CREATE TABLE users_kudu
+ (
+ timestamp_ms BIGINT,
+ user STRING,
+ user_location STRING default null,
+ followers_count INT,
+ friends_count INT,
+ text STRING,
+ sentiment STRING,
+ PRIMARY KEY(timestamp_ms, user)
+ )
+ PARTITION BY HASH PARTITIONS 10
+ STORED AS KUDU
+  TBLPROPERTIES ('kudu.num_tablet_replicas' = '1');
 
 - Click the blue 'Play' button on the left. You will get a confirmation that the table has been created. 
 
@@ -492,6 +530,7 @@ We will now setup a Kudu table with the same schema that we are using in Step 6 
 
 [Back to Index](#content)
 
+<!--
 --
 ## Publish Data to Kafka
 
@@ -544,6 +583,7 @@ We will now setup a Kudu table with the same schema that we are using in Step 6 
 [Back to Index](#content)
 
 --
+-->
 
 ## Use Impala to query Kudu
 
@@ -551,7 +591,7 @@ We will now setup a Kudu table with the same schema that we are using in Step 6 
 - Access Hue and navigate to the Impala Query. 
 - Execute the following query: 
 
-		select count(*) from meetup_comment_sentiment;
+		select count(*) from users_kudu;
 		
 - If you execute this query a few times, you would be able to see records getting populated into your table. 
 
@@ -559,7 +599,7 @@ We will now setup a Kudu table with the same schema that we are using in Step 6 
 
 - Let's also check the values of columns. For this, we advise that you use a ```limit``` parameter, if executing a ```select *``` statement, as follows:
 
-		select * from meetup_comment_sentiment limit 10;
+		select * from users_kudu limit 10;
 
 ![Link Processor](./images/impala_query_b.jpg)
 
@@ -636,7 +676,7 @@ This concludes our lab. Hope you have built a better understanding of CDF and CD
 --
 
 
-
+<!--
 ## Create a NiFi flow
 
 - Step 1: Get the tweets to be analysed
@@ -656,7 +696,7 @@ This concludes our lab. Hope you have built a better understanding of CDF and CD
   - Set **Remote URL** with value: ```http://demo.cloudera.com:9999/?properties=%7B%22annotators%22%3A%22sentiment%22%2C%22outputFormat%22%3A%22json%22%7D``` which is the url encoded value for **http://demo.cloudera.com:9999/?properties={"annotators":"sentiment","outputFormat":"json"}**
   - Set **Content-Type** to **application/x-www-form-urlencoded**
   - Apply changes
-
+-->
 
 
 
