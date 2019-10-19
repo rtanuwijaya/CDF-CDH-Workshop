@@ -495,6 +495,10 @@ Go back to [NiFi UI](http://demo.cloudera.com:9090/nifi/) and follow the steps b
 
 --
 
+## Build & Configure NiFi Flow (follow instructor screen)
+
+--
+
 ## Configure Kudu and Impala
 
 We will now setup a Kudu table with the same schema that we are using in Step 6 above. The steps are as follows:
