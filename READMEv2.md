@@ -1,4 +1,4 @@
-# CDF-CDH Labs: Real-time sentiment analysis with NiFi, Kafka, Spark, Python, Kudu, Impala and Hue.
+# CDF-CDH Labs: Real-time sentiment analysis with NiFi, Python, Kudu, Impala and Hue.
 
 --
 <!--
