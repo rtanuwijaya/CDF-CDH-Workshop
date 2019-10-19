@@ -1,7 +1,7 @@
 # CDF-CDH Labs: Real-time sentiment analysis with NiFi, Kafka, Spark, Python, Kudu, Impala and Hue.
 
 --
-
+<!--
 ### Objective
 
 **The objective of this lab is to provide hands-on experience on Cloudera CDF, CDH (Kafka, Spark, Python, Kudu, Impala and Hue) through a single integrated workflow that brings all these components together in a single use-case.** 
@@ -16,7 +16,7 @@ For the purpose of this lab, we would build an end-to-end use case that will:
 * *Leverage Spark, Python to read the data from Kafka and store it in Kudu*
 * *Use Impala to run queries on Kudu*
 * *Build a dashboard in Hue for better visualization of this dataset*
-
+-->
 ### Pre-requisites
 
 You would require an environment where the following are installed and configured:
